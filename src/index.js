@@ -12,28 +12,12 @@ import {
 
 import schema from './schema';
 import resolvers from './resolvers';
-import models, { sequelize } from './models';
-import loaders from './loaders';
 
 const app = express();
 
 app.use(cors());
 
 app.use(morgan('dev'));
-
-const getMe = async req => {
-  const token = req.headers['x-token'];
-
-  if (token) {
-    try {
-      return await jwt.verify(token, process.env.SECRET);
-    } catch (e) {
-      throw new AuthenticationError(
-        'Your session expired. Sign in again.',
-      );
-    }
-  }
-};
 
 const server = new ApolloServer({
   introspection: true,
