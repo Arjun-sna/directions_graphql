@@ -12,6 +12,8 @@ export default gql`
     steps: [StepNode]!
   }
 
+  union TripData = TransitTripData | DrivingTripData
+
   interface StepNode {
     stepTravelMode: String!
     stepDistance: TypedData!
@@ -41,8 +43,8 @@ export default gql`
     endLocation: Coords!
     polyline: String!
     stepInstruction: String!
-    arrival: PointDetails!
-    departure: PointDetails!
+    arrival: TransitPointDetails!
+    departure: TransitPointDetails!
     transitData: TransitData!
   }
 
@@ -78,17 +80,29 @@ export default gql`
     rawValue: Int!
   }
 
-  type TripData {
-    arrival: PointDetails!
-    departure: PointDetails!
+  type TransitTripData {
+    arrival: TransitPointDetails!
+    departure: TransitPointDetails!
     tripDistance: TypedData!
     tripDuration: TypedData! 
   }
 
-  type PointDetails {
-    formatedTime: String
-    timeZone: String
-    timeValue: Int
+  type DrivingTripData {
+    arrival: DrivingPointDetails!
+    departure: DrivingPointDetails!
+    tripDistance: TypedData!
+    tripDuration: TypedData! 
+  }
+
+  type DrivingPointDetails {
+    address: String!
+    location: Coords!
+  }
+
+  type TransitPointDetails {
+    formatedTime: String!
+    timeZone: String!
+    timeValue: Int!
     address: String!
     location: Coords!
   }
