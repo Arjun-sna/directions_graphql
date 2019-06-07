@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    direction(coordinates: PlaceCoordinatesInput!, travelMode: String!): Direction
+    direction(coordinates: PlaceCoordinatesInput!, travelMode: AllowTravelModes!): Direction
   }
 
   type Direction {
@@ -110,6 +110,11 @@ export default gql`
     currency: String!
     formattedFare: String!
     fareValue: Float!
+  }
+
+  enum AllowTravelModes {
+    transit
+    driving
   }
 
   input PlaceCoordinatesInput {
