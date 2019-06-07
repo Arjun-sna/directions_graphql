@@ -32,4 +32,14 @@ query($coordinates: PlaceCoordinatesInput) {
     }
   }
 }
+
+input:
+{
+  "coordinates": {
+    "startLat": 37.7919227,
+    "startLng": -122.4152148,
+    "endLat": 37.6213171,
+    "endLng": -122.3811441
+  }
+}
 ```
