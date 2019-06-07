@@ -29,41 +29,27 @@ export default {
     tripData: (parent) => parent.legs[0],
   },
   TripData: {
-    arrival: async (parent, { coordinates }, context) => {
-      const {
-        arrival_time: arrivalTime,
-        start_address: startAddress,
-        start_location: startLocation,
-      } = parent;
-
-      return {
-        formatedTime: arrivalTime.text,
-        timeZone: arrivalTime.time_zone,
-        timeValue: arrivalTime.value,
-        address: startAddress,
-        latitude: startLocation.lat,
-        longitude: startLocation.lng
-      };
-    },
-    departure: async (parent, { coordinates }, context) => {
-      const {
-        departure_time: departureTime,
-        end_address: endAddress,
-        end_location: endLocation,
-      } = parent;
-
-      return {
-        formatedTime: departureTime.text,
-        timeZone: departureTime.time_zone,
-        timeValue: departureTime.value,
-        address: endAddress,
-        latitude: endLocation.lat,
-        longitude: endLocation.lng
-      };
-    },
+    arrival: async ({
+      arrival_time: timeDetails,
+      start_address: address,
+      start_location: location,
+    }) => ({ timeDetails, address, location }),
+    departure: async ({
+      departure_time: timeDetails,
+      end_address: address,
+      end_location: location,
+    }) => ({ timeDetails, address, location }),
     tripDistance: async ({ distance }) => distance.value,
     formattedTripDistance: async ({ distance }) => distance.text,
     tripDuration: async ({ duration }) => duration.value,
     formattedTripDuration: async ({ duration }) => duration.text,
-  }
+  },
+  PointDetails: {
+    formatedTime: ({ timeDetails: { text } }) => text,
+    timeZone: ({ timeDetails: { time_zone } }) => time_zone,
+    timeValue: ({ timeDetails: { value } }) => value,
+    address: ({ address }) => address,
+    latitude: ({ location: { lat } }) => lat,
+    longitude: ({ location: { lng } }) => lng,
+  },
 }
