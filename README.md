@@ -8,7 +8,7 @@ GraphQL wrapper over the Google directions API.
 # Sample Query
 
 ```graphql
-fragment PointDetailsParts on PointDetails {
+fragment TransitPointDetailsParts on TransitPointDetails {
   formatedTime
   address
   timeZone
@@ -16,6 +16,41 @@ fragment PointDetailsParts on PointDetails {
   location {
     latitude
     longitude
+  }
+}
+fragment DrivingPointDetailsParts on DrivingPointDetails {
+  address
+  location {
+    latitude
+    longitude
+  }
+}
+fragment TransitTripPart on TransitTripData {
+  arrival {
+    ...TransitPointDetailsParts
+  }
+  departure {
+    ...TransitPointDetailsParts
+  }
+  tripDuration {
+    ...TypedDataParts
+  }
+  tripDistance {
+    ...TypedDataParts
+  }
+}
+fragment DrivingTripPart on DrivingTripData {
+  arrival {
+    ...DrivingPointDetailsParts
+  }
+  departure {
+    ...DrivingPointDetailsParts
+  }
+  tripDuration {
+    ...TypedDataParts
+  }
+  tripDistance {
+    ...TypedDataParts
   }
 }
 fragment TypedDataParts on TypedData {
@@ -26,25 +61,19 @@ fragment CoordsPart on Coords {
   latitude
   longitude
 }
-query($coordinates: PlaceCoordinatesInput) {
-  transitDirection(coordinates: $coordinates) {
+query($coordinates: PlaceCoordinatesInput!, $travleMode: AllowTravelModes!) {
+  direction(coordinates: $coordinates, travelMode: $travleMode) {
     fare {
       formattedFare
       currency
       fareValue
     }
     tripData {
-      arrival {
-        ...PointDetailsParts
+      ... on DrivingTripData {
+       	... DrivingTripPart
       }
-      departure {
-        ...PointDetailsParts
-      }
-      tripDuration {
-        ...TypedDataParts
-      }
-      tripDistance {
-        ...TypedDataParts
+      ... on TransitTripData {
+        ... TransitTripPart
       }
     }
     steps {
@@ -71,10 +100,10 @@ query($coordinates: PlaceCoordinatesInput) {
       }
       ... on TransitStep {
         arrival {
-        ...PointDetailsParts
+        ...TransitPointDetailsParts
         }
         departure {
-          ...PointDetailsParts
+          ...TransitPointDetailsParts
         }
         transitData {
           tripName
@@ -98,6 +127,7 @@ input:
     "startLng": -122.4152148,
     "endLat": 37.6213171,
     "endLng": -122.3811441
-  }
+  },
+  "travleMode": "walking"
 }
 ```
