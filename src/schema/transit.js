@@ -13,6 +13,10 @@ export default gql`
   type TripData {
     arrival: PointDetails!
     departure: PointDetails!
+    tripDistance: Int! 
+    formattedTripDistance: String!
+    tripDuration: Int! 
+    formattedTripDuration: String! 
   }
 
   type PointDetails {
