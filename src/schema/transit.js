@@ -29,7 +29,7 @@ export default gql`
     endLocation: Coords!
     polyline: String!
     stepInstruction: String!
-    walkSteps: [StepNode]!
+    walkSteps: [WalkStep]!
   }
 
   type TransitStep implements StepNode {
@@ -78,8 +78,7 @@ export default gql`
     timeZone: String!,
     timeValue: Int!
     address: String!
-    latitude: Float!
-    longitude: Float!
+    location: Coords!
   }
 
   type Fare {

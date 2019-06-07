@@ -58,8 +58,7 @@ export default {
     timeZone: ({ timeDetails: { time_zone } }) => time_zone,
     timeValue: ({ timeDetails: { value } }) => value,
     address: ({ address }) => address,
-    latitude: ({ location: { lat } }) => lat,
-    longitude: ({ location: { lng } }) => lng,
+    location: ({ location: { lat, lng } }) => ({ latitude: lat, longitude: lng }),
   },
   StepNode: {
     __resolveType({ travel_mode: travelMode }, context, info) {
