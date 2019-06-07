@@ -1,8 +1,13 @@
-# GraphQl
+# Node GraphQL Server
 
-# Sample Queries
+Sample GraphQL nodejs server.
 
-```
+
+GraphQL wrapper over the Google directions API.
+
+# Sample Query
+
+```graphql
 fragment PointDetailsParts on PointDetails {
   formatedTime
   address
