@@ -42,17 +42,18 @@ export default gql`
     stepInstruction: String!
     arrival: PointDetails!
     departure: PointDetails!
-    headSign: String!
-    name: String!,
-    shortName: String,
-    url: String,
-    vehicle: Vehicle
+    transitData: TransitData!
   }
 
-  type Vehicle {
-    icon: String!
-    name: String!
-    type: String!
+  type TransitData {
+    headSign: String!
+    tripName: String!,
+    url: String,
+    tripShortName: String,
+    stopsCount: Int,
+    vehicleIcon: String!
+    vehicleName: String!
+    vehicleType: String!
   }
 
   type Coords {

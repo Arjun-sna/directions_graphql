@@ -78,6 +78,25 @@ export default {
     walkSteps: ({ steps }) => steps
   },
   TransitStep: {
-    ...defaultStepNodeResolver
+    ...defaultStepNodeResolver,
+    arrival: ({ transit_details: {
+      arrival_time: timeDetails,
+      arrival_stop: { name: address, location },
+    }}) => ({ timeDetails, address, location }),
+    departure: ({ transit_details: {
+      departure_time: timeDetails,
+      departure_stop: { name: address, location },
+    }}) => ({ timeDetails, address, location }),
+    transitData: ({ transit_details: transitDetails }) => transitDetails
+  },
+  TransitData: {
+    headSign: ({ headsign: headSign }) => headSign,
+    stopsCount: ({ num_stops: stopsCount }) => stopsCount,
+    tripShortName: ({ line: { short_name: tripShortName } }) => tripShortName,
+    tripName: ({ line: { name } }) => name,
+    url: ({ line: { url } }) => url,
+    vehicleIcon: ({ line: { vehicle } }) => vehicle.icon,
+    vehicleName: ({ line: { vehicle } }) => vehicle.name,
+    vehicleType: ({ line: { vehicle } }) => vehicle.type,
   }
 }
