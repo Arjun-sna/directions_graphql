@@ -14,11 +14,22 @@ export default {
       return transitRoute;
     } 
   },
-  DataFields: {
-    __resolveType(data, context, info) {
-      if (data.currency) {
-        return 'Fare';
+  Direction: {
+    fare: async ({ fare }, { coordinates }, context) => {
+      if (fare) {
+        const { text, value, currency } = fare;
+        return {
+          formattedFare: text,
+          fareValue: value,
+          currency: currency,
+        }
       }
+    },
+  },
+  TripData: {
+    arrival: async (parent, { coordinates }, context) => {
+      console.log(parent)
+      return parent;
     }
   }
 }

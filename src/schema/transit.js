@@ -6,18 +6,28 @@ export default gql`
   }
 
   type Direction {
-    fare: DataFields
+    fare: Fare
+    tripData: TripData
   }
 
-  interface DataFields {
-    text: String
-    value: Float
+  type TripData {
+    arrival: PointDetails!
+    departure: PointDetails!
   }
 
-  type Fare implements DataFields {
+  type PointDetails {
+    formatedTime: String!
+    timeZone: String!,
+    timeValue: Int!
+    address: String!
+    latitude: Float!
+    longitude: Float!
+  }
+
+  type Fare {
     currency: String
-    text: String
-    value: Float
+    formattedFare: String
+    fareValue: Float
   }
 
   input PlaceCoordinatesInput {
