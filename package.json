@@ -27,6 +27,7 @@
     "morgan": "^1.9.1"
   },
   "dependencies": {
+    "apisauce": "^1.0.2",
     "apollo-server": "^2.2.3",
     "apollo-server-express": "^2.2.3",
     "bcrypt": "^3.0.2",

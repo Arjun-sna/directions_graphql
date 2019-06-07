@@ -43,7 +43,7 @@ class GoogleApiService {
     })));
   }
 
-  static async getTransitRoute(origin, destination, transitMode) {
+  static async getTransitRoute(origin, destination, transitMode = '') {
     if (!origin || !destination) {
       return;
     }
@@ -66,7 +66,7 @@ class GoogleApiService {
       transit_mode: transitMode,
     }
     const transitResponse = await googleApiRequest.get('maps/api/directions/json', params);
-
+    
     if (transitResponse.ok) {
       return transitResponse.data.routes[0];
     }
@@ -135,4 +135,4 @@ class GoogleApiService {
   };
 }
 
-module.exports = GoogleApiService;
+export default GoogleApiService;

@@ -6,10 +6,15 @@ export default gql`
   }
 
   type Direction {
-    fare: Fare
+    fare: DataFields
   }
 
-  type Fare {
+  interface DataFields {
+    text: String
+    value: Float
+  }
+
+  type Fare implements DataFields {
     currency: String
     text: String
     value: Float
