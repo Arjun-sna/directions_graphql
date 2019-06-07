@@ -39,10 +39,8 @@ export default {
       end_address: address,
       end_location: location,
     }) => ({ timeDetails, address, location }),
-    tripDistance: async ({ distance }) => distance.value,
-    formattedTripDistance: async ({ distance }) => distance.text,
-    tripDuration: async ({ duration }) => duration.value,
-    formattedTripDuration: async ({ duration }) => duration.text,
+    tripDistance: ({ distance: { text, value } }) => ({ formattedValue: text, rawValue: value }),
+    tripDuration: ({ duration: { text, value } }) => ({ formattedValue: text, rawValue: value }),
   },
   PointDetails: {
     formatedTime: ({ timeDetails: { text } }) => text,

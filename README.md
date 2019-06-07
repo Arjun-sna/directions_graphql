@@ -11,6 +11,10 @@ fragment PointDetailsParts on PointDetails {
   timeZone
   timeValue
 }
+fragment TypedDataParts on TypedData {
+  formattedValue
+  rawValue
+}
 query($coordinates: PlaceCoordinatesInput) {
   transitDirection(coordinates: $coordinates) {
     fare {
@@ -25,10 +29,12 @@ query($coordinates: PlaceCoordinatesInput) {
       departure {
         ...PointDetailsParts
       }
-      tripDuration
-      formattedTripDuration
-      tripDistance
-      formattedTripDistance
+      tripDuration {
+        ...TypedDataParts
+      }
+      tripDistance {
+        ...TypedDataParts
+      }
     }
   }
 }

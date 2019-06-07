@@ -7,16 +7,19 @@ export default gql`
 
   type Direction {
     fare: Fare
-    tripData: TripData
+    tripData: TripData!
+  }
+  
+  type TypedData {
+    formattedValue: String!
+    rawValue: Int!
   }
 
   type TripData {
     arrival: PointDetails!
     departure: PointDetails!
-    tripDistance: Int! 
-    formattedTripDistance: String!
-    tripDuration: Int! 
-    formattedTripDuration: String! 
+    tripDistance: TypedData!
+    tripDuration: TypedData! 
   }
 
   type PointDetails {
@@ -29,9 +32,9 @@ export default gql`
   }
 
   type Fare {
-    currency: String
-    formattedFare: String
-    fareValue: Float
+    currency: String!
+    formattedFare: String!
+    fareValue: Float!
   }
 
   input PlaceCoordinatesInput {
