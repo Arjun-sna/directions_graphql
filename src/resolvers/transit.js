@@ -12,27 +12,17 @@ const defaultStepNodeResolver = {
 
 export default {
   Query: {
-    transitDirection: async (parent, { coordinates }, context) => {
+    direction: async (parent, { coordinates, travelMode }, context) => {
       const {
         startLat, startLng, endLat, endLng
       } = coordinates;
-      const transitRoute = await  GoogleApiService.getTransitRoute(
+      const directionData = await  GoogleApiService.getDirectionData(
         { latitude: startLat, longitude: startLng },
         { latitude: endLat, longitude: endLng },
+        travelMode
       );
 
-      return transitRoute;
-    },
-    drivingDirection: async (parent, { coordinates }, context) => {
-      const {
-        startLat, startLng, endLat, endLng
-      } = coordinates;
-      const transitRoute = await  GoogleApiService.getTransitRoute(
-        { latitude: startLat, longitude: startLng },
-        { latitude: endLat, longitude: endLng },
-        'driving'
-      );
-      return transitRoute;
+      return directionData;
     },
   },
   Direction: {

@@ -2,8 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    transitDirection(coordinates: PlaceCoordinatesInput): Direction
-    drivingDirection(coordinates: PlaceCoordinatesInput): Direction
+    direction(coordinates: PlaceCoordinatesInput!, travelMode: String!): Direction
   }
 
   type Direction {

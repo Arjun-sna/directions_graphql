@@ -43,7 +43,7 @@ class GoogleApiService {
     })));
   }
 
-  static async getTransitRoute(origin, destination, travelMode = 'transit') {
+  static async getDirectionData(origin, destination, travelMode = 'transit') {
     if (!origin || !destination) {
       return;
     }
