@@ -8,7 +8,7 @@ export default gql`
   type Direction {
     fare: Fare
     tripData: TripData!
-    step: [StepNode]!
+    steps: [StepNode]!
   }
 
   interface StepNode {
