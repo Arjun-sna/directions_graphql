@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     transitDirection(coordinates: PlaceCoordinatesInput): Direction
+    drivingDirection(coordinates: PlaceCoordinatesInput): Direction
   }
 
   type Direction {
@@ -45,6 +46,17 @@ export default gql`
     transitData: TransitData!
   }
 
+  type DriveStep implements StepNode {
+    stepTravelMode: String!
+    stepDistance: TypedData!
+    stepDuration: TypedData!
+    startLocation: Coords!
+    endLocation: Coords!
+    polyline: String!
+    stepInstruction: String!
+    maneuver: String
+  }
+
   type TransitData {
     headSign: String!
     tripName: String!,
@@ -74,9 +86,9 @@ export default gql`
   }
 
   type PointDetails {
-    formatedTime: String!
-    timeZone: String!,
-    timeValue: Int!
+    formatedTime: String
+    timeZone: String
+    timeValue: Int
     address: String!
     location: Coords!
   }

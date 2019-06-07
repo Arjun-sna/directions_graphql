@@ -22,7 +22,20 @@ export default {
       );
 
       return transitRoute;
-    } 
+    },
+    drivingDirection: async (parent, { coordinates }, context) => {
+      const {
+        startLat, startLng, endLat, endLng
+      } = coordinates;
+      const transitRoute = await  GoogleApiService.getTransitRoute(
+        { latitude: startLat, longitude: startLng },
+        { latitude: endLat, longitude: endLng },
+        'driving'
+      );
+      console.log({transitRoute: transitRoute.legs[0].steps})
+
+      return transitRoute;
+    },
   },
   Direction: {
     fare: async ({ fare }, args, context) => {
@@ -41,12 +54,12 @@ export default {
   },
   TripData: {
     arrival: async ({
-      arrival_time: timeDetails,
+      arrival_time: timeDetails = {},
       start_address: address,
       start_location: location,
     }) => ({ timeDetails, address, location }),
     departure: async ({
-      departure_time: timeDetails,
+      departure_time: timeDetails = {},
       end_address: address,
       end_location: location,
     }) => ({ timeDetails, address, location }),
@@ -67,6 +80,8 @@ export default {
           return 'WalkStep';
         case 'TRANSIT':
           return 'TransitStep';
+        case 'DRIVING':
+          return 'DriveStep'
         default:
           return null;
       } 
@@ -87,6 +102,10 @@ export default {
       departure_stop: { name: address, location },
     }}) => ({ timeDetails, address, location }),
     transitData: ({ transit_details: transitDetails }) => transitDetails
+  },
+  DriveStep: {
+    ...defaultStepNodeResolver,
+    maneuver: ({ maneuver }) => maneuver,
   },
   TransitData: {
     headSign: ({ headsign: headSign }) => headSign,
