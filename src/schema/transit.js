@@ -8,6 +8,56 @@ export default gql`
   type Direction {
     fare: Fare
     tripData: TripData!
+    step: [StepNode]!
+  }
+
+  interface StepNode {
+    stepTravelMode: String!
+    stepDistance: TypedData!
+    stepDuration: TypedData!
+    startLocation: Coords!
+    endLocation: Coords!
+    polyline: String!
+    stepInstruction: String!
+  }
+
+  type WalkStep implements StepNode {
+    stepTravelMode: String!
+    stepDistance: TypedData!
+    stepDuration: TypedData!
+    startLocation: Coords!
+    endLocation: Coords!
+    polyline: String!
+    stepInstruction: String!
+    walkSteps: [StepNode]!
+  }
+
+  type TransitStep implements StepNode {
+    stepTravelMode: String!
+    stepDistance: TypedData!
+    stepDuration: TypedData!
+    startLocation: Coords!
+    endLocation: Coords!
+    polyline: String!
+    stepInstruction: String!
+    arrival: PointDetails!
+    departure: PointDetails!
+    headSign: String!
+    name: String!,
+    shortName: String,
+    url: String,
+    vehicle: Vehicle
+  }
+
+  type Vehicle {
+    icon: String!
+    name: String!
+    type: String!
+  }
+
+  type Coords {
+    latitude: Float!
+    longitude: Float!
   }
   
   type TypedData {
