@@ -35,34 +35,7 @@ const server = new ApolloServer({
       ...error,
       message,
     };
-  },
-  context: async ({ req, connection }) => {
-    if (connection) {
-      return {
-        models,
-        loaders: {
-          user: new DataLoader(keys =>
-            loaders.user.batchUsers(keys, models),
-          ),
-        },
-      };
-    }
-
-    if (req) {
-      const me = await getMe(req);
-
-      return {
-        models,
-        me,
-        secret: process.env.SECRET,
-        loaders: {
-          user: new DataLoader(keys =>
-            loaders.user.batchUsers(keys, models),
-          ),
-        },
-      };
-    }
-  },
+  }
 });
 
 server.applyMiddleware({ app, path: '/graphql' });
