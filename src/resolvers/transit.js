@@ -27,6 +27,7 @@ export default {
       }
     },
     tripData: (parent) => parent.legs[0],
+    steps: (parent) => parent.legs[0].steps,
   },
   TripData: {
     arrival: async ({
@@ -50,4 +51,16 @@ export default {
     latitude: ({ location: { lat } }) => lat,
     longitude: ({ location: { lng } }) => lng,
   },
+  StepNode: {
+    __resolveType({ travel_mode: travelMode }, context, info) {
+      switch (travelMode) {
+        case 'WALKING':
+          return 'WalkStep';
+        case 'TRANSIT':
+          return 'TransitStep';
+        default:
+          return null;
+      } 
+    }
+  }
 }
