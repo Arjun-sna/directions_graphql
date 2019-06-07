@@ -6,14 +6,20 @@
 fragment PointDetailsParts on PointDetails {
   formatedTime
   address
-  latitude
-  longitude
   timeZone
   timeValue
+  location {
+    latitude
+    longitude
+  }
 }
 fragment TypedDataParts on TypedData {
   formattedValue
   rawValue
+}
+fragment CoordsPart on Coords {
+  latitude
+  longitude
 }
 query($coordinates: PlaceCoordinatesInput) {
   transitDirection(coordinates: $coordinates) {
@@ -34,6 +40,47 @@ query($coordinates: PlaceCoordinatesInput) {
       }
       tripDistance {
         ...TypedDataParts
+      }
+    }
+    steps {
+      stepTravelMode
+      stepDistance {
+        ...TypedDataParts
+      }
+      stepDuration {
+        ...TypedDataParts
+      }
+      startLocation {
+        ...CoordsPart
+      }
+      endLocation {
+        ...CoordsPart
+      }
+      polyline
+      stepInstruction
+      ... on WalkStep {
+        walkSteps {
+          stepTravelMode
+          stepInstruction
+        }
+      }
+      ... on TransitStep {
+        arrival {
+        ...PointDetailsParts
+        }
+        departure {
+          ...PointDetailsParts
+        }
+        transitData {
+          tripName
+          tripShortName
+          url
+          headSign
+          stopsCount
+          vehicleIcon
+          vehicleName
+          vehicleType
+        }
       }
     }
   }
