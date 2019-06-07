@@ -74,7 +74,8 @@ export default {
     },
   },
   WalkStep: {
-    ...defaultStepNodeResolver
+    ...defaultStepNodeResolver,
+    walkSteps: ({ steps }) => steps
   },
   TransitStep: {
     ...defaultStepNodeResolver
