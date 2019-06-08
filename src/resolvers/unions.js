@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   PointDetails: {
     __resolveType({ timeDetails }, context, info) {
       if (timeDetails) {

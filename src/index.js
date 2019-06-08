@@ -1,15 +1,14 @@
-import 'dotenv/config';
-import cors from 'cors';
-import morgan from 'morgan';
-import http from 'http';
-import express from 'express';
-import {
+require('dotenv/config');
+const cors = require('cors');
+const morgan = require('morgan');
+const http = require('http');
+const express = require('express');
+const {
   ApolloServer,
   AuthenticationError,
-} from 'apollo-server-express';
-
-import schema from './schema';
-import resolvers from './resolvers';
+} = require('apollo-server-express');
+const schema = require('./schema');
+const resolvers = require('./resolvers');
 
 const app = express();
 

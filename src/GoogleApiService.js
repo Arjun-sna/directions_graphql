@@ -134,4 +134,4 @@ class GoogleApiService {
   };
 }
 
-export default GoogleApiService;
+module.exports = GoogleApiService;

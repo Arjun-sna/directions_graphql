@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   Direction: {
     fare: async ({ fare }, args, context) => {
       if (fare) {

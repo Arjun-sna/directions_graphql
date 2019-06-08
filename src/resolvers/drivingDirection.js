@@ -1,6 +1,6 @@
-import { defaultStepNodeResolver } from './shared';
+const { defaultStepNodeResolver } = require('./shared');
 
-export default {
+module.exports = {
   DriveStep: {
     ...defaultStepNodeResolver,
     maneuver: ({ maneuver }) => maneuver,

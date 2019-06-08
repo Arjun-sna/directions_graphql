@@ -1,12 +1,12 @@
-import { GraphQLDateTime } from 'graphql-iso-date';
-import GoogleApiService from '../GoogleApiService';
-import directionResolver from './direction';
-import drivingDirectionResolver from './drivingDirection';
-import walkingDirectionResolver from './walkingDirection';
-import transitDirectionResolver from './transitDirection';
-import interfaces from './interfaces';
-import unions from './unions';
-import resolverParts from './parts';
+const { GraphQLDateTime } = require('graphql-iso-date');
+const GoogleApiService = require('../GoogleApiService');
+const directionResolver = require('./direction');
+const drivingDirectionResolver = require('./drivingDirection');
+const walkingDirectionResolver = require('./walkingDirection');
+const transitDirectionResolver = require('./transitDirection');
+const interfaces = require('./interfaces');
+const unions = require('./unions');
+const resolverParts = require('./parts');
 
 const customScalarResolver = {
   Date: GraphQLDateTime,
@@ -29,7 +29,7 @@ const rootResolver = {
   }
 }
 
-export default [
+module.exports = [
   rootResolver,
   directionResolver,
   drivingDirectionResolver,

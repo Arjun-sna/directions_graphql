@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-express';
+const { gql } = require('apollo-server-express');
 
-export default gql`
+module.exports = gql`
   type DriveStep implements StepNode {
     stepTravelMode: String!
     stepDistance: TypedData!

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   StepNode: {
     __resolveType({ travel_mode: travelMode }, context, info) {
       switch (travelMode) {
