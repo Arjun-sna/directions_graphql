@@ -9,7 +9,6 @@ import schemaParts from './parts';
 import enums from './enums';
 import queryInputs from './queryInput';
 
-
 const linkSchema = gql`
   scalar Date
 
