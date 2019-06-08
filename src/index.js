@@ -7,8 +7,10 @@ const {
   ApolloServer,
   AuthenticationError,
 } = require('apollo-server-express');
+const { createRateLimitDirective } = require('graphql-rate-limit');
 const schema = require('./schema');
 const resolvers = require('./resolvers');
+const rateLimitDirective = createRateLimitDirective({ identifyContext: (ctx) => ctx.id });
 
 const app = express();
 
@@ -21,6 +23,9 @@ const server = new ApolloServer({
   playground: true,
   typeDefs: schema,
   resolvers,
+  schemaDirectives: {
+    rateLimit: rateLimitDirective
+  },
   formatError: error => {
     return {
       ...error,

@@ -8,6 +8,7 @@ const unions = require('./unions');
 const schemaParts = require('./parts');
 const enums = require('./enums');
 const queryInputs = require('./queryInput');
+const directives = require('./directives');
 
 const linkSchema = gql`
   scalar Date
@@ -35,5 +36,6 @@ module.exports = [
   walkingDirectionSchema,
   transitDirectionSchema,
   enums,
-  queryInputs
+  queryInputs,
+  directives,
 ];
