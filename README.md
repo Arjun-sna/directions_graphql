@@ -18,33 +18,29 @@ fragment TransitPointDetailsParts on TransitPointDetails {
     longitude
   }
 }
-fragment DrivingPointDetailsParts on DrivingPointDetails {
+fragment OtherPointDetailsParts on OtherPointDetails {
   address
   location {
     latitude
     longitude
   }
 }
-fragment TransitTripPart on TransitTripData {
+fragment TripDataPart on TripData {
   arrival {
-    ...TransitPointDetailsParts
+    ... on TransitPointDetails {
+    	...TransitPointDetailsParts
+    }
+    ... on OtherPointDetails {
+      ...OtherPointDetailsParts
+    }
   }
   departure {
-    ...TransitPointDetailsParts
-  }
-  tripDuration {
-    ...TypedDataParts
-  }
-  tripDistance {
-    ...TypedDataParts
-  }
-}
-fragment DrivingTripPart on DrivingTripData {
-  arrival {
-    ...DrivingPointDetailsParts
-  }
-  departure {
-    ...DrivingPointDetailsParts
+    ... on TransitPointDetails {
+    	...TransitPointDetailsParts
+    }
+    ... on OtherPointDetails {
+      ...OtherPointDetailsParts
+    }
   }
   tripDuration {
     ...TypedDataParts
@@ -61,20 +57,15 @@ fragment CoordsPart on Coords {
   latitude
   longitude
 }
-query($coordinates: PlaceCoordinatesInput!, $travleMode: AllowTravelModes!) {
-  direction(coordinates: $coordinates, travelMode: $travleMode) {
+query($coordinates: PlaceCoordinatesInput!, $travelMode: AllowTravelModes!) {
+  direction(coordinates: $coordinates, travelMode: $travelMode) {
     fare {
       formattedFare
       currency
       fareValue
     }
     tripData {
-      ... on DrivingTripData {
-       	... DrivingTripPart
-      }
-      ... on TransitTripData {
-        ... TransitTripPart
-      }
+      ...TripDataPart
     }
     steps {
       stepTravelMode
@@ -100,7 +91,7 @@ query($coordinates: PlaceCoordinatesInput!, $travleMode: AllowTravelModes!) {
       }
       ... on TransitStep {
         arrival {
-        ...TransitPointDetailsParts
+        	...TransitPointDetailsParts
         }
         departure {
           ...TransitPointDetailsParts
@@ -128,6 +119,6 @@ input:
     "endLat": 37.6213171,
     "endLng": -122.3811441
   },
-  "travleMode": "walking"
+  "travelMode": "walking"
 }
 ```
