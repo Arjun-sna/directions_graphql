@@ -11,8 +11,6 @@ export default gql`
     steps: [StepNode]!
   }
 
-  union TripData = TransitTripData | DrivingTripData
-
   interface StepNode {
     stepTravelMode: String!
     stepDistance: TypedData!
@@ -31,7 +29,7 @@ export default gql`
     endLocation: Coords!
     polyline: String!
     stepInstruction: String!
-    walkSteps: [WalkStep]!
+    walkSteps: [WalkStep!]
   }
 
   type TransitStep implements StepNode {
@@ -79,21 +77,16 @@ export default gql`
     rawValue: Int!
   }
 
-  type TransitTripData {
-    arrival: TransitPointDetails!
-    departure: TransitPointDetails!
+  type TripData {
+    arrival: PointDetails!
+    departure: PointDetails!
     tripDistance: TypedData!
     tripDuration: TypedData! 
   }
 
-  type DrivingTripData {
-    arrival: DrivingPointDetails!
-    departure: DrivingPointDetails!
-    tripDistance: TypedData!
-    tripDuration: TypedData! 
-  }
+  union PointDetails = TransitPointDetails | OtherPointDetails
 
-  type DrivingPointDetails {
+  type OtherPointDetails {
     address: String!
     location: Coords!
   }
@@ -115,6 +108,7 @@ export default gql`
   enum AllowTravelModes {
     transit
     driving
+    walking
   }
 
   input PlaceCoordinatesInput {

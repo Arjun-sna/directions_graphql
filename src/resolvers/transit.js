@@ -40,16 +40,16 @@ export default {
     tripData: (parent) => parent.legs[0],
     steps: (parent) => parent.legs[0].steps,
   },
-  TripData: {
-    __resolveType({ arrival_time, departure_time }, context, info) {
-      if (arrival_time && departure_time) {
-        return 'TransitTripData';
+  PointDetails: {
+    __resolveType({ timeDetails }, context, info) {
+      if (timeDetails) {
+        return 'TransitPointDetails';
       } else {
-        return 'DrivingTripData';
+        return 'OtherPointDetails';
       }
     }
   },
-  TransitTripData: {
+  TripData: {
     arrival: async ({
       arrival_time: timeDetails,
       start_address: address,
@@ -63,19 +63,7 @@ export default {
     tripDistance: ({ distance: { text, value } }) => ({ formattedValue: text, rawValue: value }),
     tripDuration: ({ duration: { text, value } }) => ({ formattedValue: text, rawValue: value }),
   },
-  DrivingTripData: {
-    arrival: async ({
-      start_address: address,
-      start_location: location,
-    }) => ({ address, location }),
-    departure: async ({
-      end_address: address,
-      end_location: location,
-    }) => ({ address, location }),
-    tripDistance: ({ distance: { text, value } }) => ({ formattedValue: text, rawValue: value }),
-    tripDuration: ({ duration: { text, value } }) => ({ formattedValue: text, rawValue: value }),
-  },
-  DrivingPointDetails: {
+  OtherPointDetails: {
     address: ({ address }) => address,
     location: ({ location: { lat, lng } }) => ({ latitude: lat, longitude: lng }),
   },
