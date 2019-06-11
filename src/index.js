@@ -5,7 +5,6 @@ const http = require('http');
 const express = require('express');
 const {
   ApolloServer,
-  AuthenticationError,
 } = require('apollo-server-express');
 const { createRateLimitDirective } = require('graphql-rate-limit');
 const schema = require('./schema');
@@ -28,7 +27,8 @@ const server = new ApolloServer({
   },
   formatError: error => {
     return {
-      ...error,
+      message: error.message,
+      code: error.extensions.code,
     };
   }
 });
