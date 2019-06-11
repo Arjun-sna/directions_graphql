@@ -6,13 +6,12 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const dbConfig = require('../../config/config.json')[env];
 const logger = require('../utils/logger').makeLogger('SEQUELIZE');
-
 const db = {};
 const getSequelizeInstance = () => {
   const { database, username, password } = dbConfig;
   const config = {
     ...dbConfig,
-    // logging: logger.info,
+    logging: (msg) => logger.info(msg),
   };
   return new Sequelize(database, username, password, config);
 };
