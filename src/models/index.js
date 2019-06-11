@@ -8,12 +8,16 @@ const dbConfig = require('../../config/config.json')[env];
 const logger = require('../utils/logger').makeLogger('SEQUELIZE');
 const db = {};
 const getSequelizeInstance = () => {
-  const { database, username, password } = dbConfig;
   const config = {
     ...dbConfig,
     logging: (msg) => logger.info(msg),
   };
-  return new Sequelize(database, username, password, config);
+  if (dbConfig.user_env_variable) {
+    return new Sequelize(process.env[dbConfig.user_env_variable], config);
+  } else {
+    const { database, username, password } = dbConfig;
+    return new Sequelize(database, username, password, config);
+  }
 };
 
 const sequelize = getSequelizeInstance();
