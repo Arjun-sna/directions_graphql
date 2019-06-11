@@ -12,7 +12,7 @@ const getSequelizeInstance = () => {
   const { database, username, password } = dbConfig;
   const config = {
     ...dbConfig,
-    logging: logger.info,
+    // logging: logger.info,
   };
   return new Sequelize(database, username, password, config);
 };
