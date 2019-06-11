@@ -11,17 +11,18 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
   });
 
-  User.find = async function({ username, email }) {
+  User.find = async function({ username = '', email = '' }) {
     const user = await User.findOne({
-      where:{ [Op.or]: [ { username }, { email } ] }
+      where: { [Op.or]: [ { username }, { email } ] }
     });
+    console.log({user})
 
     return user;
   }
 
   User.createUserIfNotExists = async function({ username, email, password }) {
     const [user, created] = await User.findOrCreate({
-      where: { [Op.or] : [ { username }, { email } ] },
+      where: { [Op.or]: [ { username }, { email } ] },
       defaults: { username, email, password }
     });
 

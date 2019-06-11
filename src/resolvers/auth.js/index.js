@@ -6,6 +6,11 @@ module.exports = [{
       const user = await AuthController.createUser(newUserData);
 
       return user;
+    },
+    signIn: async (parent, credentials) => {
+      const token = await AuthController.signIn(credentials);
+
+      return token;
     }
   }
 }];
