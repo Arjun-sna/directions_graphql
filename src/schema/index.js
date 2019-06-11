@@ -1,15 +1,7 @@
 const { gql } = require('apollo-server-express');
-const directionSchema = require('./direction');
-const drivingDirectionSchema = require('./drivingDirection');
-const walkingDirectionSchema = require('./walkingDirection');
-const transitDirectionSchema = require('./transitDirections');
-const interfaces = require('./interfaces');
-const unions = require('./unions');
-const schemaParts = require('./parts');
-const enums = require('./enums');
-const queryInputs = require('./queryInput');
-const directives = require('./directives');
-
+const authSchema = require('./auth');
+const userSchema = require('./users');
+const directionSchemas = require('./directions');
 const linkSchema = gql`
   scalar Date
 
@@ -28,14 +20,7 @@ const linkSchema = gql`
 
 module.exports = [
   linkSchema,
-  directionSchema,
-  schemaParts,
-  interfaces,
-  unions,
-  drivingDirectionSchema,
-  walkingDirectionSchema,
-  transitDirectionSchema,
-  enums,
-  queryInputs,
-  directives,
+  ...authSchema,
+  ...userSchema,
+  ...directionSchemas,
 ];
