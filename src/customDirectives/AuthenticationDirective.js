@@ -3,9 +3,12 @@ const {
   DirectiveLocation,
   defaultFieldResolver,
 } = require('graphql');
-const { SchemaDirectiveVisitor } = require("apollo-server")
+const {
+  SchemaDirectiveVisitor,
+  AuthenticationError,
+} = require("apollo-server");
 
-class AuthenticationDirectives extends SchemaDirectiveVisitor {
+class AuthenticationDirective extends SchemaDirectiveVisitor {
   static getDirectiveDeclaration(directiveName = 'authentication') {
     return new GraphQLDirective({
       name: directiveName,
@@ -17,7 +20,13 @@ class AuthenticationDirectives extends SchemaDirectiveVisitor {
     const { resolve = defaultFieldResolver } = field;
 
     field.resolve = async (root, args, context, info) => {
+      if (!context.user) {
+        throw new AuthenticationError('Sign in to access this query');
+      }
+
       return resolve.call(this, root, args, context, info)
     }
   }
 }
+
+module.exports = AuthenticationDirective;
