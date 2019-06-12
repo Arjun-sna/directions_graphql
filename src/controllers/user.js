@@ -6,6 +6,10 @@ class UserController {
 
     return users;
   }
+
+  static async getUserById(userId) {
+    return await User.find({ id: userId });
+  }
 }
 
 module.exports = UserController;

@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
   });
 
-  User.find = async function({ username = '', email = '' }) {
+  User.find = async function({ username = '', email = '', id = null }) {
     const user = await User.findOne({
-      where: { [Op.or]: [ { username }, { email } ] }
+      where: { [Op.or]: [ { username }, { email }, { id } ] }
     });
 
     return user;
