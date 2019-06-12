@@ -9,6 +9,5 @@ module.exports = [gql`
     arrayLengthField: String
   ) on FIELD_DEFINITION
 
-  directive @authentication on FIELD_DEFINITION
+  directive @authentication on OBJECT | FIELD_DEFINITION
 `];
-
