@@ -21,7 +21,7 @@ class AuthenticationDirective extends SchemaDirectiveVisitor {
 
     field.resolve = async (root, args, context, info) => {
       if (!context.user) {
-        throw new AuthenticationError('Sign in to access this query');
+        throw new AuthenticationError(`Sign in to access ${field.name}`);
       }
 
       return resolve.call(this, root, args, context, info)

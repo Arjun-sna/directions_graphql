@@ -6,7 +6,7 @@ module.exports = [gql`
   }
 
   extend type Mutation {
-    updateUser(username: String): Boolean!
+    updateUser(username: String): Boolean! @authentication
     deleteUser(id: ID!): Boolean!
   }
 

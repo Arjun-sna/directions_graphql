@@ -10,6 +10,12 @@ class UserController {
   static async getUserById(userId) {
     return await User.find({ id: userId });
   }
+
+  static async updateUser(user, username) {
+    await user.update({
+      username
+    });
+  }
 }
 
 module.exports = UserController;
