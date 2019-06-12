@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     const user = await User.findOne({
       where: { [Op.or]: [ { username }, { email } ] }
     });
-    console.log({user})
 
     return user;
   }
