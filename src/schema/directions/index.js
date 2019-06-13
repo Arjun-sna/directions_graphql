@@ -7,7 +7,6 @@ const unions = require('./unions');
 const schemaParts = require('./parts');
 const enums = require('./enums');
 const queryInputs = require('./queryInput');
-const directives = require('./directives');
 
 module.exports = [
   directionSchema,
@@ -19,5 +18,4 @@ module.exports = [
   schemaParts,
   enums,
   queryInputs,
-  directives,
 ];

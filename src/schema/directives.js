@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
 
-module.exports = gql`
+module.exports = [gql`
   directive @rateLimit(
     max: Int,
     window: String,
@@ -8,4 +8,6 @@ module.exports = gql`
     identityArgs: [String],
     arrayLengthField: String
   ) on FIELD_DEFINITION
-`
+
+  directive @authentication on OBJECT | FIELD_DEFINITION
+`];

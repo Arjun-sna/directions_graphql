@@ -29,7 +29,6 @@ class AuthController {
   }
 
   static async signIn(credentials) {
-    console.log(credentials)
     const matchedUser = await User.find(credentials);
 
     if (matchedUser) {
