@@ -7,9 +7,9 @@
     "node": "10.11.0"
   },
   "scripts": {
-    "start": "nodemon src/index.js",
+    "server": "nodemon server/index.js",
     "test:run-server": "TEST_DATABASE=mytestdatabase npm start",
-    "test:execute-test": "mocha --require @babel/register 'src/**/*.spec.js'",
+    "test:execute-test-server": "mocha --require @babel/register 'server/**/*.spec.js'",
     "test": "echo \"No test specified\" && exit 0",
     "postinstall": "sh scripts/heroku-predeploy.sh"
   },
