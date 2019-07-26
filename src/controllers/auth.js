@@ -15,8 +15,15 @@ const createToken = async (user, expiresIn = '365d') => {
 
 class AuthController {
   static async createUser(newUserData) {
-    const { password } = newUserData;
+    const { password, username, email } = newUserData;
     const hashesPassword = await bcrypt.hash(password, saltRounds)
+    
+    if (!username || !email) {
+      throw new UserInputError(
+        'Username and email are mandatory.',
+      );
+    }
+    
     const [user, created] = await User.createUserIfNotExists({ ...newUserData, password: hashesPassword });
 
     if (!created) {
@@ -29,10 +36,14 @@ class AuthController {
   }
 
   static async signIn(credentials) {
-    const matchedUser = await User.find(credentials);
+    const { userIdentifier, password } = credentials;
+    const matchedUser = await User.find({
+      username: userIdentifier,
+      email: userIdentifier
+    });
 
     if (matchedUser) {
-      const isValidPassword = await bcrypt.compare(credentials.password, matchedUser.password);
+      const isValidPassword = await bcrypt.compare(password, matchedUser.password);
 
       if (!isValidPassword) {
         throw new AuthenticationError('Invalid password.');
