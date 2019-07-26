@@ -29,10 +29,14 @@ class AuthController {
   }
 
   static async signIn(credentials) {
-    const matchedUser = await User.find(credentials);
+    const { userIdentifier, password } = credentials;
+    const matchedUser = await User.find({
+      username: userIdentifier,
+      email: userIdentifier
+    });
 
     if (matchedUser) {
-      const isValidPassword = await bcrypt.compare(credentials.password, matchedUser.password);
+      const isValidPassword = await bcrypt.compare(password, matchedUser.password);
 
       if (!isValidPassword) {
         throw new AuthenticationError('Invalid password.');
