@@ -15,8 +15,15 @@ const createToken = async (user, expiresIn = '365d') => {
 
 class AuthController {
   static async createUser(newUserData) {
-    const { password } = newUserData;
+    const { password, username, email } = newUserData;
     const hashesPassword = await bcrypt.hash(password, saltRounds)
+    
+    if (!username || !email) {
+      throw new UserInputError(
+        'Username and email are mandatory.',
+      );
+    }
+    
     const [user, created] = await User.createUserIfNotExists({ ...newUserData, password: hashesPassword });
 
     if (!created) {
