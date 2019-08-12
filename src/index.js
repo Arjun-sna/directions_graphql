@@ -45,13 +45,6 @@ const server = new ApolloServer({
   context: async ({ req }) => {
     if (req.headers && req.headers['x-token']) {
       const token = req.headers['x-token'];
-      // try {
-      //   const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
-        
-      //   return { user: await UserController.getUserById(tokenPayload.id) }
-      // } catch(err) {
-      //   throw new AuthenticationError('Invalid Token')
-      // }
       try {
         const user = await getUserFromToken(token);
 
@@ -59,7 +52,6 @@ const server = new ApolloServer({
       } catch(e) {
         throw new AuthenticationError('Invalid Token')
       }
-      
     }
   },
   formatError: error => {
