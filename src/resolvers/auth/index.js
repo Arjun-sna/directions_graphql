@@ -8,9 +8,9 @@ module.exports = [{
       return user;
     },
     signIn: async (parent, credentials) => {
-      const token = await AuthController.signIn(credentials);
+      const authData = await AuthController.signIn(credentials);
 
-      return token;
+      return authData;
     }
   }
 }];

@@ -49,7 +49,7 @@ class AuthController {
         throw new AuthenticationError('Invalid password.');
       }
 
-      return { token: createToken(matchedUser) };
+      return { token: createToken(matchedUser), user: matchedUser };
     }
 
     throw new UserInputError('User does not exist for this credentials');
