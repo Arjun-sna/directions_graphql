@@ -6,6 +6,7 @@ Sample GraphQL nodejs server.
 GraphQL wrapper over the Google directions API.
 
 [Graphiql](https://directions-graphql.herokuapp.com/graphql)
+
 [Frontend App](https://directions-gql.netlify.com)
 
 # Sample Query
