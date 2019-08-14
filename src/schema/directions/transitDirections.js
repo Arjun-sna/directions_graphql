@@ -16,7 +16,7 @@ module.exports = gql`
 
   type TransitData {
     headSign: String!
-    tripName: String!,
+    tripName: String,
     url: String,
     tripShortName: String,
     stopsCount: Int,
