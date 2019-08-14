@@ -16,14 +16,14 @@ module.exports = {
   },
   TripData: {
     arrival: async ({
-      arrival_time: timeDetails,
-      start_address: address,
-      start_location: location,
-    }) => ({ timeDetails, address, location }),
-    departure: async ({
       departure_time: timeDetails,
       end_address: address,
       end_location: location,
+    }) => ({ timeDetails, address, location }),
+    departure: async ({
+      arrival_time: timeDetails,
+      start_address: address,
+      start_location: location,
     }) => ({ timeDetails, address, location }),
     tripDistance: ({ distance: { text, value } }) => ({ formattedValue: text, rawValue: value }),
     tripDuration: ({ duration: { text, value } }) => ({ formattedValue: text, rawValue: value }),
