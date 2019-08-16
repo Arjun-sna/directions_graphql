@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 const authSchema = require('./auth');
 const userSchema = require('./users');
-const directionSchemas = require('./directions');
+const googleDirectionSchemas = require('./google');
 const directives = require('./directives');
 
 const linkSchema = gql`
@@ -24,6 +24,6 @@ module.exports = [
   linkSchema,
   ...authSchema,
   ...userSchema,
-  ...directionSchemas,
+  ...googleDirectionSchemas,
   ...directives,
 ];
