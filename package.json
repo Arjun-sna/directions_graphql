@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "apisauce": "^1.0.2",
-    "apollo-server": "^2.2.3",
+    "apollo-server": "^2.25.3",
     "apollo-server-express": "^2.14.2",
     "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
